@@ -1,0 +1,28 @@
+<% include partials/header %>
+  <h1>
+    <%= title %>
+  </h1>
+  <section>
+    
+    <% for (let i = 0; i < movies.length; i++) { %>
+
+      <div class="card" style="width: 20rem;">
+        <img src="<%= movies[i].imageUrl %>" alt="Card example image" style="height:200px;">
+
+        <div class="card-body">
+          <h4 class="card-title">
+            <%= movies[i].title %>
+          </h4>
+          <h5 class="card-subtitle">
+            <%= movies[i].publisher %>
+          </h5>
+          <p class="card-text">
+            <%= movies[i].year %>
+          </p>
+          <a href='/playMovie?movie=<%= movies[i].lastUrl() %>' class="paper-btn">Play</a>
+        </div>
+      </div>
+      </div>
+      <% } %>
+  </section>
+  <% include partials/footer %>
