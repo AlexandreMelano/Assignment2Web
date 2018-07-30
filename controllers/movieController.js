@@ -29,7 +29,7 @@ exports.admin = async (req, res) => {
     user: req.user,
   });
 };
-
+/*fill data for testing*/
 exports.fillData = (req, res) => {
   const data = [
     {
@@ -55,7 +55,7 @@ exports.fillData = (req, res) => {
   Movie.collection.insertMany(data);
   res.redirect('/admin');
 };
-
+/* add movie */
 exports.addMovie = (req, res) => {
   res.render('addMovie', {
     title: 'Add Movie',
@@ -71,14 +71,14 @@ exports.createMovie = async (req, res) => {
     console.log(err);
   }
 };
-
+/*to use if movies trailers are included*/
 exports.play = (req, res) => {
   const moviePassed = url.parse(req.url, true).query;
   res.render('playMovie', {
     title: moviePassed.movie,
   });
 };
-
+/* delete*/
 exports.deleteMovie = (req, res) => {
   Movie.findByIdAndRemove(
     { _id: req.params.id },

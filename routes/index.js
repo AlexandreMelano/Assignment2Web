@@ -17,12 +17,15 @@ router.get('/admin/delete/:id', movieController.deleteMovie);
 router.get('/admin/edit/:id', movieController.editMovie);
 router.post('/admin/edit/:id', movieController.updateMovie);
 
+/*add & create controller*/
 router.get('/add', movieController.addMovie);
 router.post('/add', movieController.createMovie);
 
+/*register get & post*/
 router.get('/register', userController.register);
 router.post('/register', userController.registerUser);
 
+/*login & logout*/
 router.get('/login', userController.login);
 router.post('/login', authController.login);
 
@@ -31,9 +34,10 @@ router.get('/logout', (req, res)=> {
     res.redirect('/movies');
 });
 
+/*google access*/
 router.get('/google', authController.googlePre);
 router.get('/google/callback', authController.googlePost);
-
+/*github access*/
 router.get('/github', authController.githubPre);
 router.get('/github/callback', authController.githubPost);
 

@@ -23,8 +23,7 @@ const movieSchema = new mongoose.Schema({
 
 // before it is saved, it will run this function
 movieSchema.pre('save', function (next) {
-  // ! must use 'function' above so 'this' refers to correct object
-  // get year from last 4 characters of imageUrl
+  
   this.year = this.imageUrl.substr(-4);
   next();
 });

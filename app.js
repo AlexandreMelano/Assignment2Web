@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 /*passport*/
 const passport = require('passport');
 
+/*require for google strategy*/
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const session = require('express-session');
@@ -51,7 +52,7 @@ const user = require('./models/User');
 
 
 passport.use(user.createStrategy());
-
+/*adding goole functionality*/
 passport.use(new GoogleStrategy(
 {
   clientID: process.env.GOOGLE_CLIENT_ID,
