@@ -30,4 +30,11 @@ router.get('/logout', (req, res)=> {
     req.logout();
     res.redirect('/movies');
 });
+
+router.get('/google', authController.googlePre);
+router.get('/google/callback', authController.googlePost);
+
+router.get('/github', authController.githubPre);
+router.get('/github/callback', authController.githubPost);
+
 module.exports = router;

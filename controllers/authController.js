@@ -22,6 +22,17 @@ exports.googlePre = passport.authenticate('google', {
     failureRedirect: '/login'
   });
   
+  exports.githubPre = passport.authenticate('github');
+
+  exports.githubPost = passport.authenticate(
+    'github',
+    { failureRedirect: '/login' },
+    (req, res) => {
+      // Successful authentication, redirect
+      res.redirect('/admin');
+    }
+  );
+
 exports.isLoggedIn = (req, res, next) => {
     //first check if the user is authenticated
     //if succesful

@@ -7,6 +7,9 @@ require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
 /*passport*/
 const passport = require('passport');
+
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 const session = require('express-session');
 
 
@@ -45,7 +48,39 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const user = require('./models/User');
+
+
 passport.use(user.createStrategy());
+
+passport.use(new GoogleStrategy(
+{
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
+},
+(request, accessToken, refreshToken, profile, done) => {
+  user.findOrCreate({ username: profile.emails[0].value }, (err, user) => 
+    done(err, user));
+}
+));
+
+/*adding github functionality*/
+// const GitHubStrategy = require('passport-github').Strategy;
+
+// passport.use(
+//   new GitHubStrategy(
+//     {
+//       clientID: process.env.GITHUB_CLIENT_ID,
+//       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//       callbackURL: process.env.GITHUB_CALLBACK_URL
+//     },
+//     function(accessToken, refreshToken, profile, cb) {
+//       User.findOrCreate({ githubId: profile.id }, function(err, user) {
+//         return cb(err, user);
+//       });
+//     }
+//   )
+// );
 
 /* read/write user login info*/
 passport.serializeUser(user.serializeUser());
