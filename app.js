@@ -7,12 +7,9 @@ require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
 /*passport*/
 const passport = require('passport');
-
+const session = require('express-session');
 /*require for google strategy*/
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
-const session = require('express-session');
-
 
 const localStrategy = require('passport-local').Strategy;
 
@@ -40,7 +37,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
-  secret: 'some string value',
+  secret:  process.env.SECRET,
   resave: true,
   saveUninitialized: false
 }));
@@ -105,7 +102,7 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500);
   console.log(err);
-  res.render('error', { title: 'Retro Games' });
+  res.render('error', { title: 'Movies' });
 });
 
 module.exports = app;
