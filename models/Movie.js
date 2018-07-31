@@ -10,7 +10,7 @@ const movieSchema = new mongoose.Schema({
   },
   director: {
     type: String,
-    required: 'Please enter publisher',
+    required: 'Please enter direcotr',
   },
   imageUrl: {
     type: String,
