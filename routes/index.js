@@ -2,6 +2,7 @@ const express = require('express');
 const movieController = require('../controllers/movieController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const passport = require('passport');
 
 const router = express.Router();
 

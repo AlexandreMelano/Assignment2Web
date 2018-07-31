@@ -8,10 +8,8 @@ const bodyParser = require('body-parser');
 /*passport*/
 const passport = require('passport');
 const session = require('express-session');
-/*require for google strategy*/
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-const localStrategy = require('passport-local').Strategy;
+//const localStrategy = require('passport-local').Strategy;
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -49,6 +47,10 @@ const user = require('./models/User');
 
 
 passport.use(user.createStrategy());
+
+/*require for google strategy*/
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 /*adding goole functionality*/
 passport.use(new GoogleStrategy(
 {

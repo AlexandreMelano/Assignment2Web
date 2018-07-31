@@ -24,7 +24,7 @@ const movieSchema = new mongoose.Schema({
 // before it is saved, it will run this function
 movieSchema.pre('save', function (next) {
   
-  this.year = this.imageUrl.substr(-4);
+  
   next();
 });
 
@@ -33,4 +33,4 @@ movieSchema.methods.lastUrl = function () {
   return this.imageUrl.substring(indexOfSlash + 1);
 };
 
-module.exports = mongoose.model('movie', movieSchema);
+module.exports = mongoose.model('Movie', movieSchema);

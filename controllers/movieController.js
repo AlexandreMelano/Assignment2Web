@@ -66,7 +66,7 @@ exports.createMovie = async (req, res) => {
   try {
     const movie = new Movie(req.body);
     await movie.save();
-    res.redirect('/Movies');
+    res.redirect('/movies');
   } catch (err) {
     console.log(err);
   }
@@ -109,7 +109,7 @@ exports.editMovie = (req, res, next) => {
 
 exports.updateMovie = (req, res) => {
   // get year from last 4 characters of imageURL
-  req.body.year = req.body.imageUrl.substr(-4);
+  
 
   Movie.update({ _id: req.params.id }, req.body, (err) => {
     if (err) {
