@@ -30,6 +30,11 @@
                 </li>
                 <% } %>
 
+                <% if (locals.user) { %>
+                    <li>
+                        <a href="/api">API</a>
+                    </li>
+                    <% } %>
 
                     <% if (!locals.user) { %>
                         <li>
