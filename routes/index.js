@@ -10,6 +10,7 @@ const router = express.Router();
 router.get('/', movieController.homePage);
 
 router.get('/movies', movieController.getMovies);
+router.get('/API', movieController.getMoviesApi);
 router.get('/filldata', movieController.fillData);
 router.get('/playMovie', movieController.play);
 
@@ -39,7 +40,11 @@ router.get('/logout', (req, res)=> {
 router.get('/google', authController.googlePre);
 router.get('/google/callback', authController.googlePost);
 /*github access*/
+// router.get('/github', authController.githubPre);
+// router.get('/github/callback', authController.githubPost);
 router.get('/github', authController.githubPre);
-router.get('/github/callback', authController.githubPost);
+router.get('/github/callback', authController.githubPost); 
+
+
 
 module.exports = router;

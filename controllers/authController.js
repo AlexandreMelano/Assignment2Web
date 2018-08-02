@@ -24,15 +24,23 @@ exports.googlePre = passport.authenticate('google', {
   
   exports.githubPre = passport.authenticate('github');
 /*github login access once working*/
-  exports.githubPost = passport.authenticate(
-    'github',
-    { failureRedirect: '/login' },
-    (req, res) => {
-      // Successful authentication, redirect
-      res.redirect('/admin');
-    }
-  );
+  exports.githubPost = passport.authenticate('github',{
+    successRedirect: '/admin',
+    failureRedirect: '/login' 
+    
+    });
 
+//  /*github login access once working*/
+// exports.githubPost = passport.authenticate(
+//   'github',
+//   { failureRedirect: '/login' },
+//   (req, res) => {
+//      //Successful authentication, redirect
+//     res.redirect('/admin');
+//   }
+//  );
+
+/* Check if user is logged in*/
 exports.isLoggedIn = (req, res, next) => {
     //first check if the user is authenticated
     //if succesful

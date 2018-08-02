@@ -4,7 +4,7 @@ const url = require('url');
 exports.homePage = (req, res) => {
   res.render('index', { title: 'Home' });
 };
-
+/*get movies from DB*/
 exports.getMovies = (req, res) => {
   Movie.find((err, movies) => {
     if (err) {
@@ -18,6 +18,18 @@ exports.getMovies = (req, res) => {
     }
   });
 };
+
+/*get movies from DB*/
+exports.getMoviesApi = (req, res) => {
+  Movie.find((err, movies) => {
+    if (err) {
+      res.json({message: 'error!'});
+    } else {
+      res.json(movies);
+    }
+  });
+};
+
 
 exports.admin = async (req, res) => {
   // use Movie model to query db for Movie data
@@ -61,7 +73,7 @@ exports.addMovie = (req, res) => {
     title: 'Add Movie',
   });
 };
-
+/* Create a movie entry*/
 exports.createMovie = async (req, res) => {
   try {
     const movie = new Movie(req.body);

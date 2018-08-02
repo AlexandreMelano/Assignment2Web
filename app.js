@@ -7,6 +7,7 @@ require('dotenv').config({ path: 'variables.env' });
 const bodyParser = require('body-parser');
 /*passport*/
 const passport = require('passport');
+
 const session = require('express-session');
 
 //const localStrategy = require('passport-local').Strategy;
@@ -46,6 +47,7 @@ app.use(passport.session());
 const user = require('./models/User');
 
 
+
 passport.use(user.createStrategy());
 
 /*require for google strategy*/
@@ -64,23 +66,41 @@ passport.use(new GoogleStrategy(
 }
 ));
 
-/*adding github functionality*/
-// const GitHubStrategy = require('passport-github').Strategy;
+// /*adding github functionality*/
+// var GitHubStrategy = require('passport-github').Strategy;
 
-// passport.use(
-//   new GitHubStrategy(
-//     {
-//       clientID: process.env.GITHUB_CLIENT_ID,
-//       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-//       callbackURL: process.env.GITHUB_CALLBACK_URL
-//     },
-//     function(accessToken, refreshToken, profile, cb) {
-//       User.findOrCreate({ githubId: profile.id }, function(err, user) {
-//         return cb(err, user);
-//       });
-//     }
-//   )
-// );
+// passport.use(new GitHubStrategy({
+//     clientID: process.env.GITHUB_CLIENT_ID,
+//     clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//     callbackURL: process.env.GITHUB_CALLBACK_URL
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     user.findOrCreate({ githubId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
+
+const GitHubStrategy = require('passport-github').Strategy;
+
+passport.use(new GitHubStrategy(
+    {
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
+      callbackURL: process.env.GITHUB_CALLBACK_URL
+    },
+    (accessToken, refreshToken, profile, cb) => {
+      user.findOrCreate(
+        { username: profile.username },
+        (err, user) => {
+          //console.log(profile);
+          cb(err, user);
+        }
+      );
+    }
+  ));
+
+
 
 /* read/write user login info*/
 passport.serializeUser(user.serializeUser());
